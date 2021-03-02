@@ -1,0 +1,23 @@
+
+## 1) 合并所有样本分布比对至父本和母本基因组上的gene count数据
+## In linux
+CombineAllSamplesGeneCount.R
+
+## 2) In linux, 将文件中的空格转换成制表符，并在第一行的gene name 列插入一个空格。
+sed 's/ /\t/g' GeneCount_intersect210223.txt|awk '{if(FNR == 1){print "\t"$0}else{print $0}}'  > GeneCount_intersect210223_final.txt
+
+## 3) 统计每个样本比对至父母本基因组上的基因表达量之和，然后通过画堆叠图评估各样本基因组偏好程度
+GeneCountPlotCode210223.R
+
+## 4) 只保留常染色体上的基因，并重复2）步骤。
+RemoveSexChromosome210223.R
+
+## 5) 筛选ASE
+Sample_filtering.R
+Different_expression_gene_filtering.R
+
+## 6)差异表达基因的可视化
+DEG_visualing.R
+DEG_FillBarPlot.R
+DEG_BarPlot.R
+
